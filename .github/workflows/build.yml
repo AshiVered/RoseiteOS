@@ -4,10 +4,8 @@ on:
   push:
     branches: [ main ]
 
-# משתיק את האזהרות ומכריח שימוש ב-Node 24
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
 permissions:
   contents: read
@@ -20,6 +18,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Check if recipe exists
+        run: ls -l recipe.yml
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -29,12 +30,12 @@ jobs:
 
       - name: Build and Push OCI Image
         run: |
-          # הרצת ה-Vib בתוך קונטיינר עם העברת הרשאות הגישה (config.json)
+          # שינוי התגית מ-latest ל-main
           docker run --privileged --rm \
             -v .:/recipe \
             -v /home/runner/.docker/config.json:/root/.docker/config.json \
             -w /recipe \
-            ghcr.io/vanilla-os/vib:latest \
+            ghcr.io/vanilla-os/vib:main \
             build recipe.yml \
             --tag ghcr.io/${{ github.repository_owner }}/torah-os:latest \
             --push
@@ -48,10 +49,10 @@ jobs:
 
       - name: Generate ISO
         run: |
-          # בניית ה-ISO מתוך האימג' שהעלינו
+          # שינוי התגית ל-main גם כאן
           docker run --privileged --rm \
             -v .:/output \
-            ghcr.io/vanilla-os/os-constructor:latest \
+            ghcr.io/vanilla-os/os-constructor:main \
             ghcr.io/${{ github.repository_owner }}/torah-os:latest
 
       - name: Upload ISO Artifact
