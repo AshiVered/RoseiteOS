@@ -1,28 +1,30 @@
 name: Build Torah OS
 on:
-  workflow_dispatch: # הפעלה ידנית בלשונית Actions
+  workflow_dispatch:
   push:
     branches: [ main ]
 
+# פותר את האזהרה לגבי Node.js
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
   contents: read
-  packages: write # נדרש כדי להעלות את התמונה ל-GitHub
+  packages: write
 
 jobs:
   build-image:
     runs-on: ubuntu-latest
-    outputs:
-      image_tag: ${{ steps.generate_tag.outputs.tag }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Install QEMU (Required for cross-build)
         run: |
           sudo apt-get update
           sudo apt-get install -y qemu-user-static
 
-      - name: Download Vib
+      - name: Download Vib (Manual Execution)
         run: |
           curl -L https://github.com/Vanilla-OS/vib/releases/latest/download/vib-linux-amd64 -o vib
           chmod +x vib
@@ -36,7 +38,8 @@ jobs:
 
       - name: Build and Push OCI Image
         run: |
-          # בניית התמונה והעלאתה ל-GitHub Packages
+          # בניית האימג' והעלאה למחסן ה-Packages שלך בגיטהאב
+          # שימוש ב-sudo הכרחי כאן
           sudo ./vib build recipe.yml --tag ghcr.io/${{ github.repository_owner }}/torah-os:latest --push
 
   build-iso:
@@ -46,13 +49,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build ISO
-        uses: Vanilla-OS/iso-constructor@main
-        with:
-          image: ghcr.io/${{ github.repository_owner }}/torah-os:latest
-          # כאן המערכת הופכת את התמונה שבנינו לקובץ ISO
+      - name: Install ISO Constructor
+        run: |
+          # הורדת הכלי ליצירת ISO ישירות כדי למנוע שגיאות "Action not found"
+          curl -L https://github.com/Vanilla-OS/os-constructor/releases/latest/download/os-constructor-linux-amd64 -o constructor
+          chmod +x constructor
 
-      - name: Upload ISO
+      - name: Generate ISO
+        run: |
+          # יצירת ה-ISO מתוך האימג' שבנינו בשלב הקודם
+          sudo ./constructor ghcr.io/${{ github.repository_owner }}/torah-os:latest
+
+      - name: Upload ISO Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Torah-OS-ISO
