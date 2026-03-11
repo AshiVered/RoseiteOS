@@ -1,5 +1,5 @@
 name: torah-os
-description: "מערכת למידה מוגנת - זית ואונלי-אופיס"
+description: "מערכת לימוד מוגנת - זית ואונלי אופיס"
 base: ghcr.io/vanilla-os/desktop:latest
 
 stages:
@@ -7,42 +7,30 @@ stages:
     modules:
       - type: shell
         commands:
-          # 1. התקנת כלי עבודה זמניים
+          # 1. התקנת תשתיות זמניות
           - apt update
-          - apt install -y curl ca-certificates sed
+          - apt install -y curl ca-certificates sed libfuse2
           
           # 2. התקנת OnlyOffice
           - apt install -y onlyoffice-desktopeditors
           
-          # 3. הורדה והתקנה של "זית" ללא sudo
+          # 3. התקנת אפליקציית "זית" (טיפול ב-sudo ובשאלות אינטראקטיביות)
           - curl -L https://zayitapp.com/download/launch.linux -o /tmp/zayit_install.sh
-          # פקודת הקסם: מוחקת את המילה sudo מהסקריפט כדי שלא יבקש סיסמה
           - sed -i 's/sudo //g' /tmp/zayit_install.sh
           - chmod +x /tmp/zayit_install.sh
-          # הרצת הסקריפט (כעת הוא ירוץ ישירות כ-Root)
-          - bash /tmp/zayit_install.sh
+          # הרצה ללא שאלות (yes) ותחת הגדרת ה-Frontend הלא-אינטראקטיבי
+          - DEBIAN_FRONTEND=noninteractive yes "" | bash /tmp/zayit_install.sh
           
-          # --- שלב הנעילה (זהה לקודם) ---
+          # 4. נעילה הרמטית - הסרת טרמינל, רשת, דפדפן וכלים של ונילה
+          - apt purge -y gnome-terminal xterm network-manager net-tools iproute2 wpasupplicant wireless-tools firefox-esr gnome-software wget curl sed apx abroot
           
-          # 4. הסרת הטרמינל
-          - apt purge -y gnome-terminal xterm
-          
-          # 5. הסרת רכיבי רשת (ביטול אינטרנט)
-          - apt purge -y network-manager net-tools iproute2 wpasupplicant wireless-tools
-          
-          # 6. הסרת דפדפנים וכלים שיכולים להוריד קבצים (כולל curl ו-sed)
-          - apt purge -y firefox-esr gnome-software wget curl sed
-          
-          # 7. הסרת כלי המערכת של ונילה
-          - apt purge -y apx abroot
-          
-          # 8. ניקוי שאריות
+          # 5. ניקוי שאריות
           - apt autoremove -y
           - rm /tmp/zayit_install.sh
 
       - type: shell
         commands:
-          # 9. ביטול הרשאות מנהל למשתמש
+          # 6. ביטול הרשאות מנהל למשתמש ברירת המחדל
           - delgroup vanilla sudo || true
-          # 10. נעילת Root
+          # 7. נעילה מוחלטת של Root
           - passwd -l root
