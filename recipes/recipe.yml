@@ -78,6 +78,8 @@ modules:
       - fcitx5-qt
       - fcitx5-configtool
       - kcm-fcitx5
+      - libime
+      - libime-data
 
   # התקנת Obsidian כ-Flatpak בצורה מובנית
   - type: default-flatpaks
