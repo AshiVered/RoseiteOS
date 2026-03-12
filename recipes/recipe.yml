@@ -38,6 +38,7 @@ modules:
       
       # כלי מערכת (כולל פלאגינים והתראות)
       - plasma-discover
+      - plasma-discover-flatpak
       - plasma-discover-notifier
       - plasma-discover-kns
       - kate
@@ -50,10 +51,13 @@ modules:
       - plasma-welcome
       - kdebugsettings
       - kernel-modules-extra
+      - plasma-nm-openconnect
       
       # מנועי קלט
       - fcitx5
       - fcitx5-mozc
+      - fcitx5-unikey
+      - fcitx5-chewing
       - fcitx5-data
 
   # התקנת Obsidian כ-Flatpak בצורה מובנית
