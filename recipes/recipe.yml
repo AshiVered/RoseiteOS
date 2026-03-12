@@ -21,24 +21,35 @@ modules:
       - onlyoffice-desktopeditors
       - sayonara
     remove:
-      # התוכנות מהגרסאות הקודמות
+      # דפדפנים וטרמינל (כולל חבילות השפה)
       - firefox
+      - firefox-langpacks
       - konsole
-      - kernel-modules-extra
-      # העלמת כפתור הרשת
-      - plasma-nm 
-      # הסרות חדשות לפי השמות המדויקים בפדורה:
-      - plasma-discover
+      
+      # רשת וקישוריות (כולל תלויות ופלאגינים)
+      - plasma-nm
+      - plasma-nm-vpnc
       - kde-connect
+      - kde-connect-libs
       - krfb
+      - krfb-libs
+      
+      # כלי מערכת (כולל פלאגינים והתראות)
+      - plasma-discover
+      - plasma-discover-notifier
       - kate
+      - kate-plugins
       - kwrite
-      - firewall-config # אנחנו מסירים רק את ה-GUI של ה-Firewall, לא את מנוע הרשת כדי לא לשבור תלויות
+      - firewall-config
       - kwalletmanager5
       - khelpcenter
       - plasma-welcome
       - kdebugsettings
-      - fcitx5 # מנוע קלט לשפות אסייתיות, אפשר להסיר.
+      - kernel-modules-extra
+      
+      # מנועי קלט (כולל התוסף היפני שהופיע בלוג)
+      - fcitx5
+      - fcitx5-mozc
 
   # התקנת Obsidian כ-Flatpak בצורה מובנית
   - type: default-flatpaks
