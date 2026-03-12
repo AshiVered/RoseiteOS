@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # מאפשר להריץ בנייה ידנית בלחיצת כפתור
+  workflow_dispatch:
 
 jobs:
   bluebuild:
@@ -21,4 +21,4 @@ jobs:
         with:
           recipe: recipes/recipe.yml
           registry_token: ${{ github.token }}
-          prune: true
+          # ביטלנו את prune וצמצמנו למינימום הנדרש לבנייה ראשונה
