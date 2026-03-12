@@ -82,10 +82,9 @@ modules:
       - libime-data
 
   # התקנת Obsidian כ-Flatpak בצורה מובנית
-  - type: default-flatpaks
+  - type: default-flatpaks@v1
+    notify: false
     system:
-      repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
-      repo-name: flathub
       install:
         - md.obsidian.Obsidian
 
