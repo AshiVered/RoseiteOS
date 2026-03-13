@@ -38,16 +38,11 @@ jobs:
           iso_name: roseite-offline.iso
           iso_type: offline # הפקודה שיוצרת את ההתקנה הסגורה
 
-      - name: Max Compression with XZ
-        run: |
-          # דחיסה של הקובץ הסופי בלבד לרמה הכי גבוהה
-          xz -9v ${{ steps.build.outputs.iso_path }}/roseite-offline.iso
-
-      - name: Upload Compressed ISO
+      - name: Upload ISO
         uses: actions/upload-artifact@v4
         with:
-          name: roseite-final-xz
-          # אנחנו מעלים רק את הקובץ הדחוס
-          path: ${{ steps.build.outputs.iso_path }}/roseite-offline.iso.xz
+          name: roseite-final-iso
+          # אנחנו מעלים את ה-ISO המקורי והלא דחוס
+          path: ${{ steps.build.outputs.iso_path }}/roseite-offline.iso
           if-no-files-found: error
-          retention-days:
+          retention-days: 7
