@@ -8,8 +8,7 @@ Preinstalled:
 
 - Zayit books
 - OnlyOffice
-- Obsidian
-- Sayonara Music player
+- Dopamine Music player
 
 "Kosher" features:
 

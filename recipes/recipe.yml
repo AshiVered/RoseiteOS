@@ -82,12 +82,6 @@ modules:
       - kcm-fcitx5
       - libime
       - libime-data
-# הסרת חבילות רקעים של פדורה ו-KDE
-      - plasma-workspace-wallpapers
-      - f43-backgrounds-kde
-      - f43-backgrounds-base
-      - desktop-backgrounds-compat
-      - desktop-backgrounds-kde
 
 
   - type: script
