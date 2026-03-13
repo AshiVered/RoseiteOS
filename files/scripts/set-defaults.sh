@@ -3,14 +3,6 @@ set -euo pipefail
 
 mkdir -p /etc/skel/.config
 
-# הגדרת שורת המשימות עם זית, אובסידיאן ו-OnlyOffice
-cat <<EOF > /etc/skel/.config/plasma-org.kde.plasma.desktop-appletsrc
-[SerializationSettings]
-FreeCanary=true
-
-[Applets][1][Configuration][General]
-launchers=applications:zayit-Zayit.desktop,applications:onlyoffice-desktopeditors.desktop
-EOF
 
 # הגדרת מקלדת
 cat <<EOF > /etc/skel/.config/kxkbrc
