@@ -36,3 +36,15 @@ chmod 0440 /etc/sudoers.d/99-block-sudo
 chmod a-s /usr/bin/sudo
 chmod a-s /usr/bin/su
 
+# 1. Restrict permission management to ROOT ONLY (prevents users from making files executable)
+chmod 700 /usr/bin/chmod
+chmod 700 /usr/bin/fattr
+chmod 700 /usr/bin/setfacl
+
+# 2. Restrict Flatpak management tools to ROOT ONLY (keeps the engine running for the OS)
+chmod 700 /usr/bin/flatpak
+
+# 3. Restrict critical system manipulation tools to ROOT ONLY
+chmod 700 /usr/bin/rpm-ostree
+chmod 700 /usr/bin/su
+

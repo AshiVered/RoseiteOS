@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-name: roseiteos
+name: roseite
 description: RoseiteOS - A completely hermetic, terminal-free, secure study system.
 base-image: ghcr.io/ublue-os/kinoite-main
 image-version: 43
@@ -8,9 +8,9 @@ modules:
   # שינוי השם והגרסה המוצגים במערכת
   - type: os-release
     properties:
-      name: "RoseiteOS"
-      pretty-name: "RoseiteOS"
-      version: "0.1"
+      name: "Roseite"
+      pretty-name: "Roseite"
+      version: "0.2-Alpha"
 
   - type: script
     scripts:
@@ -19,7 +19,7 @@ modules:
   - type: rpm-ostree
     install:
       - onlyoffice-desktopeditors
-      - sayonara
+      - https://github.com/digimezzo/dopamine/releases/download/v3.0.2/Dopamine-3.0.2.rpm
     remove:
       # דפדפנים וטרמינל (כולל חבילות השפה)
       - firefox
@@ -45,13 +45,15 @@ modules:
       - kate
       - kate-plugins
       - kate-krunner-plugin
-      - kwrite
       - firewall-config
       - kwalletmanager5
       - khelpcenter
       - plasma-welcome
       - kdebugsettings
       - kernel-modules-extra
+      - kinfocenter
+      - kjournald
+      - kjournald-libs
       
       # מנועי קלט (הסרה מוחלטת של סביבת fcitx לפי הטרמינל המקומי)
       - fcitx5
@@ -80,17 +82,14 @@ modules:
       - kcm-fcitx5
       - libime
       - libime-data
+# הסרת חבילות רקעים של פדורה ו-KDE
+      - plasma-workspace-wallpapers
+      - f43-backgrounds-kde
+      - f43-backgrounds-base
 
-  # התקנת Obsidian כ-Flatpak בצורה מובנית
-  - type: default-flatpaks@v1
-    notify: false
-    system:
-      install:
-        - md.obsidian.Obsidian
 
   - type: script
     scripts:
-      - set-defaults.sh # סקריפט המקלדת שהוספנו
+      - set-defaults.sh
       - install-zayit.sh
       - hermetic-lock.sh
-      - create-shortcut.sh

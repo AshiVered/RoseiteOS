@@ -30,18 +30,24 @@ jobs:
         id: build
         with:
           arch: x86_64
-          image_name: roseiteos
+          image_name: roseite
           image_repo: ghcr.io/ashivered
           image_tag: 43
           version: 43
           variant: Kinoite
-          iso_name: roseiteos-offline.iso
+          iso_name: roseite-offline.iso
           iso_type: offline # הפקודה שיוצרת את ההתקנה הסגורה
 
-      - name: Upload ISO as Artifact
+      - name: Max Compression with XZ
+        run: |
+          # דחיסה של הקובץ הסופי בלבד לרמה הכי גבוהה
+          xz -9v ${{ steps.build.outputs.iso_path }}/roseite-offline.iso
+
+      - name: Upload Compressed ISO
         uses: actions/upload-artifact@v4
         with:
-          name: ashi-secure-os-offline-iso
-          path: ${{ steps.build.outputs.iso_path }}
+          name: roseite-final-xz
+          # אנחנו מעלים רק את הקובץ הדחוס
+          path: ${{ steps.build.outputs.iso_path }}/roseite-offline.iso.xz
           if-no-files-found: error
-          retention-days: 7
+          retention-days:
