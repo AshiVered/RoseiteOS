@@ -12,11 +12,9 @@ Options=grp:alt_shift_toggle
 Use=true
 EOF
 
-# הגדרת שורת המשימות עם זית, אובסידיאן ו-OnlyOffice
-cat <<EOF > /etc/skel/.config/plasma-org.kde.plasma.desktop-appletsrc
-[SerializationSettings]
-FreeCanary=true
+# מחיקה פיזית של תמונת הרקע Autumn מהמערכת
+rm -rf /usr/share/wallpapers/Autumn
 
-[Applets][1][Configuration][General]
-launchers=applications:zayit-Zayit.desktop,applications:onlyoffice-desktopeditors.desktop
-EOF
+# הגדרת הרקע summer_1am כברירת המחדל החדשה של המערכת
+ln -sfn /usr/share/wallpapers/summer_1am /usr/share/wallpapers/Default
+ln -sfn /usr/share/wallpapers/summer_1am /usr/share/wallpapers/Fedora
