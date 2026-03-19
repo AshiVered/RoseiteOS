@@ -19,6 +19,7 @@ modules:
   - type: rpm-ostree
     install:
       - onlyoffice-desktopeditors
+      - gnome-text-editor
       - https://github.com/digimezzo/dopamine/releases/download/v3.0.2/Dopamine-3.0.2.rpm
     remove:
       # דפדפנים וטרמינל (כולל חבילות השפה)
