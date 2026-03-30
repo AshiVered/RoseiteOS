@@ -26,7 +26,17 @@ modules:
       # דפדפנים וטרמינל (כולל חבילות השפה)
       - firefox
       - firefox-langpacks
-      
+      - gnome-software
+
+      - malcontent-control   # בקרת הורים (GUI)
+      - malcontent           # backend (אם אתה לא צריך בכלל)
+
+      - htop
+      - nvtop
+
+      - gnome-tour
+      - yelp                 # Help (ה־viewer של GNOME)
+        
       # רשת וקישוריות (כולל כל הפלאגינים והשירותים)
 
 

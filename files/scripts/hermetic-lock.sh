@@ -6,6 +6,8 @@ echo "Executing Hermetic Lockdown..."
 # 1. חסימת שירותים (Masking)
 systemctl mask NetworkManager
 systemctl mask wpa_supplicant
+systemctl mask packagekit.service
+systemctl mask packagekit-offline-update.service
 
 # 2. הסרת מודולי קרנל של רשת (כדי שלא יהיו דרייברים)
 # אנחנו יוצרים קובץ Blacklist שמונע טעינת דרייברים של Wi-Fi ו-Ethernet

@@ -9,6 +9,11 @@ cp /tmp/files/ZmanBar.zip /tmp/ZmanBar.zip
 mkdir -p /usr/share/gnome-shell/extensions/${EXT1}
 unzip -o /tmp/ZmanBar.zip -d /usr/share/gnome-shell/extensions/${EXT1}
 chmod -R 755 /usr/share/gnome-shell/extensions/${EXT1}
+SCHEMA_DIR="/usr/share/gnome-shell/extensions/${EXT1}/schemas"
+
+if [ -d "$SCHEMA_DIR" ]; then
+    glib-compile-schemas "$SCHEMA_DIR"
+fi
 
 # dconf system defaults
 mkdir -p /etc/dconf/db/local.d

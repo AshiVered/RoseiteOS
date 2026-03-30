@@ -1,6 +1,6 @@
 # RosieteOS
 
-RoseiteOS is a Linux distribution, based on Fedora SliverBlue.
+RoseiteOS is a Linux distribution, based on Fedora SliverBlue 43.
 
 RoseiteOS is only for Torah study:
 
