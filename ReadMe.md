@@ -1,6 +1,6 @@
 # RosieteOS
 
-![logo](https://raw.githubusercontent.com/AshiVered/RosieteOS/main/files/res/RosieteOS_wallpaper.png)
+![logo](https://raw.githubusercontent.com/AshiVered/RoseiteOS/main/files/res/RoseiteOS_wallpaper.png)
 
 RoseiteOS is a Linux distribution, based on Fedora SliverBlue 43.
 

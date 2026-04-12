@@ -11,7 +11,7 @@ unzip -o /tmp/ZmanBar.zip -d /usr/share/gnome-shell/extensions/${EXT1}
 chmod -R 755 /usr/share/gnome-shell/extensions/${EXT1}
 # התקנת רקע
 mkdir -p /usr/share/backgrounds/roseite
-cp /tmp/files/res/RosieteOS_wallpaper.png /usr/share/backgrounds/roseite/default.png
+cp /tmp/files/res/RoseiteOS_wallpaper.png /usr/share/backgrounds/roseite/default.png
 chmod 644 /usr/share/backgrounds/roseite/default.png
 SCHEMA_DIR="/usr/share/gnome-shell/extensions/${EXT1}/schemas"
 
